@@ -1,0 +1,147 @@
+{
+  "site": {
+    "name": "CupGIS",
+    "slogan": {
+      "zh": "开启地理空间智能新纪元",
+      "en": "Opening a New Era of Geospatial Intelligence"
+    },
+    "description": {
+      "zh": "CupGIS 是一个集数据索引、在线工具、技术博客于一体的地理信息系统平台，致力于为用户提供高效、智能的地理空间解决方案。",
+      "en": "CupGIS is a geographic information system platform integrating data indexing, online tools, and technical blogs, dedicated to providing efficient and intelligent geospatial solutions."
+    }
+  },
+  "modules": [
+    {
+      "id": "data",
+      "icon": "database",
+      "title": { "zh": "数据索引", "en": "Data Index" },
+      "subtitle": { "zh": "海量地理空间数据，一键检索", "en": "Massive geospatial data, one-click search" },
+      "description": {
+        "zh": "汇聚全球遥感影像、矢量地图、DEM高程等多源地理数据，提供高效的索引与检索服务。",
+        "en": "Aggregating global remote sensing imagery, vector maps, DEM elevation and other multi-source geographic data, providing efficient indexing and retrieval services."
+      },
+      "url": "https://data.cupgis.com",
+      "color": "#e63946",
+      "features": {
+        "zh": ["遥感影像库", "矢量地图服务", "DEM高程数据", "实时数据更新"],
+        "en": ["Remote Sensing Imagery", "Vector Map Service", "DEM Elevation Data", "Real-time Data Updates"]
+      },
+      "orbit": {
+        "radius": 1.3,
+        "inclination": 28.5,
+        "speed": 0.15,
+        "startAngle": 0
+      }
+    },
+    {
+      "id": "tools",
+      "icon": "tools",
+      "title": { "zh": "在线工具", "en": "Online Tools" },
+      "subtitle": { "zh": "专业GIS分析工具，即开即用", "en": "Professional GIS analysis tools, ready to use" },
+      "description": {
+        "zh": "提供坐标转换、空间分析、地图制图、数据可视化等系列在线工具，无需安装，浏览器即可使用。",
+        "en": "Providing coordinate conversion, spatial analysis, cartography, data visualization and other online tools, no installation required, usable in browser."
+      },
+      "url": "https://tools.cupgis.com",
+      "color": "#d62839",
+      "features": {
+        "zh": ["坐标转换", "空间分析", "地图制图", "数据可视化"],
+        "en": ["Coordinate Conversion", "Spatial Analysis", "Cartography", "Data Visualization"]
+      },
+      "orbit": {
+        "radius": 1.45,
+        "inclination": 45,
+        "speed": 0.18,
+        "startAngle": 1.047
+      }
+    },
+    {
+      "id": "blog",
+      "icon": "blog",
+      "title": { "zh": "技术博客", "en": "Tech Blog" },
+      "subtitle": { "zh": "分享GIS前沿技术与实践经验", "en": "Sharing cutting-edge GIS technology and practices" },
+      "description": {
+        "zh": "涵盖GIS开发教程、空间算法解析、行业应用案例等内容，与开发者共同成长。",
+        "en": "Covering GIS development tutorials, spatial algorithm analysis, industry application cases, growing together with developers."
+      },
+      "url": "https://blog.cupgis.com",
+      "color": "#c1121f",
+      "features": {
+        "zh": ["开发教程", "算法解析", "应用案例", "技术分享"],
+        "en": ["Development Tutorials", "Algorithm Analysis", "Application Cases", "Tech Sharing"]
+      },
+      "orbit": {
+        "radius": 1.6,
+        "inclination": 51.6,
+        "speed": 0.21,
+        "startAngle": 2.094
+      }
+    },
+    {
+      "id": "docs",
+      "icon": "docs",
+      "title": { "zh": "开发文档", "en": "Documentation" },
+      "subtitle": { "zh": "完整的API文档与开发指南", "en": "Complete API documentation and developer guides" },
+      "description": {
+        "zh": "提供详尽的API参考、SDK使用指南、快速入门教程，助力开发者快速集成GIS能力。",
+        "en": "Providing detailed API references, SDK usage guides, quick start tutorials, helping developers quickly integrate GIS capabilities."
+      },
+      "url": "https://docs.cupgis.com",
+      "color": "#a41623",
+      "features": {
+        "zh": ["API参考", "SDK指南", "快速入门", "示例代码"],
+        "en": ["API Reference", "SDK Guide", "Quick Start", "Sample Code"]
+      },
+      "orbit": {
+        "radius": 1.8,
+        "inclination": 90,
+        "speed": 0.24,
+        "startAngle": 3.141
+      }
+    },
+    {
+      "id": "community",
+      "icon": "community",
+      "title": { "zh": "社区", "en": "Community" },
+      "subtitle": { "zh": "加入开发者社区，共建生态", "en": "Join the developer community, build ecosystem together" },
+      "description": {
+        "zh": "与全球GIS开发者交流分享，参与开源项目，共同推动地理空间技术发展。",
+        "en": "Communicate and share with global GIS developers, participate in open source projects, jointly promote geospatial technology development."
+      },
+      "url": "https://community.cupgis.com",
+      "color": "#8b1a24",
+      "features": {
+        "zh": ["技术交流", "开源贡献", "问答互动", "活动资讯"],
+        "en": ["Tech Discussion", "Open Source Contribution", "Q&A Interaction", "Event News"]
+      },
+      "orbit": {
+        "radius": 1.95,
+        "inclination": 60,
+        "speed": 0.27,
+        "startAngle": 4.189
+      }
+    },
+    {
+      "id": "about",
+      "icon": "about",
+      "title": { "zh": "关于我们", "en": "About Us" },
+      "subtitle": { "zh": "了解CupGIS的使命与愿景", "en": "Learn about CupGIS mission and vision" },
+      "description": {
+        "zh": "CupGIS致力于打造开放、共享、智能的地理信息平台，让地理空间技术触手可及。",
+        "en": "CupGIS is dedicated to building an open, shared, intelligent geographic information platform, making geospatial technology accessible."
+      },
+      "url": "https://about.cupgis.com",
+      "color": "#ffffff",
+      "features": {
+        "zh": ["使命愿景", "团队成员", "联系方式", "加入我们"],
+        "en": ["Mission & Vision", "Team", "Contact", "Careers"]
+      },
+      "orbit": {
+        "radius": 2.1,
+        "inclination": 15,
+        "speed": 0.30,
+        "startAngle": 5.236
+      }
+    }
+  ]
+}

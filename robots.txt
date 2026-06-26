@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /config/
+Disallow: /assets/
+
+Sitemap: https://www.cupgis.com/sitemap.xml
