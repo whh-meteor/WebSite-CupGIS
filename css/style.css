@@ -559,6 +559,7 @@ a:hover { color: var(--color-accent-hover); }
   opacity: 0;
   transition: opacity var(--transition-normal);
   border-radius: var(--radius-lg);
+  pointer-events: none;
 }
 
 .module-card:hover::before {
