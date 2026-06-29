@@ -42,7 +42,7 @@
         "zh": "提供坐标转换、空间分析、地图制图、数据可视化等系列在线工具，无需安装，浏览器即可使用。",
         "en": "Providing coordinate conversion, spatial analysis, cartography, data visualization and other online tools, no installation required, usable in browser."
       },
-      "url": "https://viewer.cupgis.cn",
+      "url": "https://mts.cupgis.cn",
       "color": "#d62839",
       "features": {
         "zh": ["坐标转换", "空间分析", "地图制图", "数据可视化"],
@@ -86,7 +86,7 @@
         "zh": "提供详尽的API参考、SDK使用指南、快速入门教程，助力开发者快速集成GIS能力。",
         "en": "Providing detailed API references, SDK usage guides, quick start tutorials, helping developers quickly integrate GIS capabilities."
       },
-      "url": "https://mts.cupgis.cn",
+      "url": "https://docs.cupgis.com",
       "color": "#a41623",
       "features": {
         "zh": ["API参考", "SDK指南", "快速入门", "示例代码"],
