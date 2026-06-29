@@ -20,7 +20,7 @@
         "zh": "汇聚全球遥感影像、矢量地图、DEM高程等多源地理数据，提供高效的索引与检索服务。",
         "en": "Aggregating global remote sensing imagery, vector maps, DEM elevation and other multi-source geographic data, providing efficient indexing and retrieval services."
       },
-      "url": "https://data.cupgis.com",
+      "url": "https://data.cupgis.cn",
       "color": "#e63946",
       "features": {
         "zh": ["遥感影像库", "矢量地图服务", "DEM高程数据", "实时数据更新"],
@@ -42,7 +42,7 @@
         "zh": "提供坐标转换、空间分析、地图制图、数据可视化等系列在线工具，无需安装，浏览器即可使用。",
         "en": "Providing coordinate conversion, spatial analysis, cartography, data visualization and other online tools, no installation required, usable in browser."
       },
-      "url": "https://tools.cupgis.com",
+      "url": "https://mts.cupgis.cn",
       "color": "#d62839",
       "features": {
         "zh": ["坐标转换", "空间分析", "地图制图", "数据可视化"],
@@ -64,7 +64,7 @@
         "zh": "涵盖GIS开发教程、空间算法解析、行业应用案例等内容，与开发者共同成长。",
         "en": "Covering GIS development tutorials, spatial algorithm analysis, industry application cases, growing together with developers."
       },
-      "url": "https://blog.cupgis.com",
+      "url": "https://blog.cupgis.cn",
       "color": "#c1121f",
       "features": {
         "zh": ["开发教程", "算法解析", "应用案例", "技术分享"],
