@@ -86,10 +86,10 @@ const earthFragmentShader = `
     dayColor *= 1.3;
 
     // 夜间灯光大幅增强，确保黑暗面城市灯光清晰可见
-    nightColor *= 5.5;
+    nightColor *= 7.0;
 
-    // 夜间侧也显示微弱云层（月光照射感）
-    vec3 nightCloudColor = mix(nightColor, vec3(0.08, 0.09, 0.12), cloudsStrength * 0.3);
+    // 夜间侧也显示云层（月光照射感，提升亮度使其可见）
+    vec3 nightCloudColor = mix(nightColor, vec3(0.22, 0.24, 0.28), cloudsStrength * 0.55);
     nightColor = mix(nightColor, nightCloudColor, 1.0 - dayStrength);
 
     // 基础昼夜混合
@@ -473,11 +473,11 @@ export class Earth {
     if (this.earthMesh) this.earthMesh.rotation.y = this.earthRotation;
 
     // 云层独立旋转（U方向反向平移，与地球自转同向但更慢，产生微弱相对运动）
-    this.cloudRotation += deltaTime * 0.01;
+    this.cloudRotation += deltaTime * 0.005;
     if (this.earthMesh) this.earthMesh.material.uniforms.cloudOffset.value = this.cloudRotation;
 
-    // 太阳公转（绕 Y 轴），驱动昼夜交替
-    this.sunOrbitAngle += deltaTime * 0.05;
+    // 太阳公转（绕 Y 轴），驱动昼夜交替（降低速度）
+    this.sunOrbitAngle += deltaTime * 0.03;
     const r = this.sunPosition.length();
     const baseY = 1.3;
     const planeR = Math.sqrt(Math.max(r * r - baseY * baseY, 0.01));
@@ -488,7 +488,8 @@ export class Earth {
     );
     if (this.sunMesh) {
       this.sunMesh.position.copy(this.sunPosition);
-      this.sunMesh.rotation.y += deltaTime * 0.2;
+      // 太阳自转（大幅降低速度，使其可见且不眼花）
+      this.sunMesh.rotation.y += deltaTime * 0.04;
     }
 
     // 同步太阳位置到着色器
