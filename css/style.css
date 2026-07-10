@@ -304,6 +304,8 @@ img, svg { display: block; max-width: 100%; }
   text-align: center;
   padding: var(--nav-h) var(--sp-5) var(--sp-8);
   overflow: hidden;
+  /* 允许鼠标拖拽穿透到下方 canvas（OrbitControls 旋转） */
+  pointer-events: none;
 }
 
 /* 中心轻微暗化，让 3D 地球上的文字更清晰，但不阻挡交互 */
@@ -320,6 +322,8 @@ img, svg { display: block; max-width: 100%; }
   z-index: 1;
   max-width: 720px;
   animation: hero-in 1.2s var(--ease-out) both;
+  /* 容器不拦截事件，让拖拽穿透到 canvas */
+  pointer-events: none;
 }
 
 .hero-badge {
@@ -372,6 +376,8 @@ img, svg { display: block; max-width: 100%; }
   gap: var(--sp-3);
   justify-content: center;
   flex-wrap: wrap;
+  /* 按钮区域恢复交互 */
+  pointer-events: auto;
 }
 
 .btn {

@@ -1,12 +1,11 @@
 /**
  * CupGIS - 场景管理器
- * Three.js 首屏 3D 场景：地球 + 卫星编队 + 星空
- * 仅首屏展示，滚动后画布淡出；相机采用固定视角 + 鼠标视差
+ * Three.js 首屏 3D 场景：真实地球（含太阳/月球/轨道/星空/大气/昼夜交替）
+ * 鼠标交互：OrbitControls 拖拽旋转 + 滚轮缩放 + 自动旋转
  */
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Earth } from './earth.js';
-import { Satellite } from './satellite.js';
-import { StarField } from './starfield.js';
 
 export class SceneManager {
   constructor(canvasElement) {
@@ -14,24 +13,13 @@ export class SceneManager {
     this.scene = null;
     this.camera = null;
     this.renderer = null;
+    this.controls = null;
     this.earth = null;
-    this.satellites = [];
-    this.starField = null;
     this.clock = new THREE.Clock();
     this.scrollProgress = 0;
     this.activeModuleIndex = -1;
     this.isReady = false;
     this._animationId = null;
-
-    // 首屏固定视角基础参数
-    this._baseCamPos = new THREE.Vector3(0, 1.0, 3.4);
-    this._baseLookAt = new THREE.Vector3(0, 0, 0);
-    this._currentCamPos = this._baseCamPos.clone();
-    this._currentLookAt = this._baseLookAt.clone();
-
-    // 鼠标视差目标
-    this._targetMouseX = 0;
-    this._targetMouseY = 0;
   }
 
   async init(moduleConfigs, onProgress) {
@@ -39,32 +27,19 @@ export class SceneManager {
     this._setupScene();
     this._setupCamera();
     this._setupLights();
-    this._setupMouseParallax();
+    this._setupControls();
 
-    // 地球（真实 NASA 纹理）
+    // 真实地球场景（内置太阳/月球/星空/大气/昼夜）
     this.earth = new Earth(this.scene, { radius: 1 });
     onProgress(0.05);
-    await this.earth.init((p) => onProgress(0.05 + p * 0.7)); // 纹理占 5%-75%
-    onProgress(0.75);
+    await this.earth.init((p) => onProgress(0.05 + p * 0.9));
+    onProgress(1.0);
 
-    // 星空
-    const starCount = window.innerWidth < 768 ? 1500 : 3000;
-    this.starField = new StarField(this.scene, starCount);
-    onProgress(0.80);
-
-    // 卫星编队（每模块一架）
-    for (const config of moduleConfigs) {
-      const sat = new Satellite(this.scene, config);
-      this.satellites.push(sat);
-    }
-    onProgress(0.90);
-
-    // 初始相机
-    this.camera.position.copy(this._currentCamPos);
-    this.camera.lookAt(this._currentLookAt);
+    // 初始相机位置
+    this.camera.position.set(0, 0.6, 4.6);
+    this.camera.lookAt(0, 0.15, 0);
 
     this.isReady = true;
-    onProgress(1.0);
     this._startRenderLoop();
   }
 
@@ -77,7 +52,7 @@ export class SceneManager {
     });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0x0a0a0c, 1);
+    this.renderer.setClearColor(0x000000, 1);
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     window.addEventListener('resize', () => {
@@ -93,7 +68,7 @@ export class SceneManager {
 
   _setupCamera() {
     this.camera = new THREE.PerspectiveCamera(
-      32,
+      42,
       window.innerWidth / window.innerHeight,
       0.1,
       200
@@ -101,56 +76,50 @@ export class SceneManager {
   }
 
   _setupLights() {
-    const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
-    sunLight.position.set(0, 0, 3);
-    this.scene.add(sunLight);
-    const ambient = new THREE.AmbientLight(0x111122, 0.15);
+    // 极弱环境光，主要光照由地球着色器基于太阳位置计算
+    const ambient = new THREE.AmbientLight(0x222233, 0.2);
     this.scene.add(ambient);
   }
 
-  /** 鼠标视差：相机随鼠标轻微偏移 */
-  _setupMouseParallax() {
-    window.addEventListener('mousemove', (e) => {
-      this._targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      this._targetMouseY = (e.clientY / window.innerHeight) * 2 - 1;
-    }, { passive: true });
+  /** OrbitControls：鼠标拖拽旋转 + 滚轮缩放 + 自动旋转 */
+  _setupControls() {
+    this.controls = new OrbitControls(this.camera, this.canvas);
+    // 允许旋转
+    this.controls.enableRotate = true;
+    // 允许缩放
+    this.controls.enableZoom = true;
+    this.controls.minDistance = 2.5;
+    this.controls.maxDistance = 12;
+    // 禁用平移（避免位移到空白处）
+    this.controls.enablePan = false;
+    // 自动旋转（用户未交互时缓慢转动）
+    this.controls.autoRotate = true;
+    this.controls.autoRotateSpeed = 0.4;
+    // 旋转阻尼（惯性平滑）
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.06;
+    // 限制极角避免翻面
+    this.controls.minPolarAngle = 0.2;
+    this.controls.maxPolarAngle = Math.PI - 0.2;
+    // 初始目标
+    this.controls.target.set(0, 0.15, 0);
+    this.controls.update();
   }
 
   _startRenderLoop() {
     const animate = () => {
       this._animationId = requestAnimationFrame(animate);
       const delta = this.clock.getDelta();
-      const elapsed = this.clock.getElapsedTime();
 
-      if (document.hidden) return; // 标签页隐藏时暂停
+      if (document.hidden) return;
 
       this.earth.update(this.scrollProgress, delta);
-      this.starField.update(elapsed);
-      for (const sat of this.satellites) sat.update(delta);
-
-      this._updateCamera(delta);
+      // OrbitControls 阻尼更新
+      if (this.controls) this.controls.update();
 
       this.renderer.render(this.scene, this.camera);
     };
     animate();
-  }
-
-  /** 相机：固定视角 + 鼠标视差平滑跟随 */
-  _updateCamera(delta) {
-    // 视差偏移量
-    const parallaxX = this._targetMouseX * 0.35;
-    const parallaxY = -this._targetMouseY * 0.2;
-
-    const targetPos = this._baseCamPos.clone().add(new THREE.Vector3(parallaxX, parallaxY, 0));
-    const targetLook = this._baseLookAt.clone().add(new THREE.Vector3(parallaxX * 0.3, parallaxY * 0.3, 0));
-
-    // 平滑插值
-    const smoothing = 1 - Math.pow(0.04, delta);
-    this._currentCamPos.lerp(targetPos, smoothing);
-    this._currentLookAt.lerp(targetLook, smoothing);
-
-    this.camera.position.copy(this._currentCamPos);
-    this.camera.lookAt(this._currentLookAt);
   }
 
   setScrollProgress(progress) {
@@ -159,16 +128,12 @@ export class SceneManager {
 
   setActiveModule(index) {
     this.activeModuleIndex = index;
-    for (let i = 0; i < this.satellites.length; i++) {
-      this.satellites[i].setActive(i === index);
-    }
   }
 
   dispose() {
     if (this._animationId) cancelAnimationFrame(this._animationId);
-    this.earth.dispose();
-    this.starField.dispose();
-    this.satellites.forEach(s => s.dispose());
-    this.renderer.dispose();
+    if (this.controls) this.controls.dispose();
+    if (this.earth) this.earth.dispose();
+    if (this.renderer) this.renderer.dispose();
   }
 }
