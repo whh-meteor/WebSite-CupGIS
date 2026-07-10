@@ -52,6 +52,7 @@ const earthFragmentShader = `
   uniform sampler2D brcMap;        // R=bump, G=roughness, B=clouds
   uniform vec3 sunPosition;
   uniform float transitionWidth;   // 晨昏线过渡宽度
+  uniform float cloudOffset;       // 云层独立旋转偏移（U方向平移）
   varying vec2 vUv;
   varying vec3 vNormalW;
 
@@ -72,13 +73,24 @@ const earthFragmentShader = `
     vec3 dayColor = texture2D(dayTexture, vUv).rgb;
     vec3 nightColor = texture2D(nightTexture, vUv).rgb;
 
-    // ── 云层：从 BRC 蓝色通道提取，混入白天颜色 ──
-    // 对照案例 mix(dayTexture, vec3(1), cloudsStrength * 2)
-    float cloudsStrength = smoothstep(0.2, 1.0, texture2D(brcMap, vUv).b);
-    dayColor = mix(dayColor, vec3(1.0), cloudsStrength * 2.0);
+    // ── 云层：从 BRC 蓝色通道提取 ──
+    // 使用 U 方向反向平移，使云层与地球自转方向一致（向东漂移）
+    vec2 cloudUv = vec2(vUv.x - cloudOffset, vUv.y);
+    float cloudsStrength = smoothstep(0.25, 1.0, texture2D(brcMap, cloudUv).b);
 
-    // 夜间灯光增强
-    nightColor *= 1.5;
+    // 白天侧：云层半透明混合，降低白度
+    vec3 dayCloudColor = mix(dayColor, vec3(0.92, 0.94, 0.96), cloudsStrength * 0.7);
+    dayColor = mix(dayColor, dayCloudColor, dayStrength);
+
+    // 白天侧整体提亮
+    dayColor *= 1.3;
+
+    // 夜间灯光大幅增强，确保黑暗面城市灯光清晰可见
+    nightColor *= 5.5;
+
+    // 夜间侧也显示微弱云层（月光照射感）
+    vec3 nightCloudColor = mix(nightColor, vec3(0.08, 0.09, 0.12), cloudsStrength * 0.3);
+    nightColor = mix(nightColor, nightCloudColor, 1.0 - dayStrength);
 
     // 基础昼夜混合
     vec3 color = mix(nightColor, dayColor, dayStrength);
@@ -185,6 +197,8 @@ export class Earth {
 
     // 地球自转角度
     this.earthRotation = 0;
+    // 云层独立旋转角度（比地球稍快，产生相对运动）
+    this.cloudRotation = 0;
 
     // 内部计时
     this.elapsed = 0;
@@ -247,6 +261,7 @@ export class Earth {
         brcMap: { value: textures.brc },
         sunPosition: { value: this.sunPosition },
         transitionWidth: { value: 0.3 },
+        cloudOffset: { value: 0.0 },
       },
     });
     this.earthMesh = new THREE.Mesh(geometry, material);
@@ -456,6 +471,10 @@ export class Earth {
     // 地球自转
     this.earthRotation += deltaTime * 0.06;
     if (this.earthMesh) this.earthMesh.rotation.y = this.earthRotation;
+
+    // 云层独立旋转（U方向反向平移，与地球自转同向但更慢，产生微弱相对运动）
+    this.cloudRotation += deltaTime * 0.01;
+    if (this.earthMesh) this.earthMesh.material.uniforms.cloudOffset.value = this.cloudRotation;
 
     // 太阳公转（绕 Y 轴），驱动昼夜交替
     this.sunOrbitAngle += deltaTime * 0.05;

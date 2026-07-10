@@ -170,6 +170,8 @@ img, svg { display: block; max-width: 100%; }
   z-index: 0;
   display: block;
   transition: opacity 0.8s var(--ease);
+  /* 确保 canvas 可接收鼠标事件（OrbitControls 拖拽） */
+  pointer-events: auto;
 }
 .three-canvas.fade-out { opacity: 0; pointer-events: none; }
 
@@ -179,6 +181,8 @@ img, svg { display: block; max-width: 100%; }
 .main {
   position: relative;
   z-index: 1;
+  /* main 容器默认不拦截事件，让拖拽穿透到 canvas */
+  pointer-events: none;
 }
 
 /* ────────────────────────────────────────────
@@ -193,6 +197,8 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   transition: background var(--t-mid), backdrop-filter var(--t-mid), border-color var(--t-mid);
   border-bottom: 1px solid transparent;
+  /* 导航栏恢复交互 */
+  pointer-events: auto;
 }
 /* 滚动后：玻璃态深底 */
 .nav.scrolled {
@@ -299,20 +305,20 @@ img, svg { display: block; max-width: 100%; }
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--nav-h) var(--sp-5) var(--sp-8);
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
+  padding: var(--nav-h) var(--sp-7) var(--sp-8);
   overflow: hidden;
   /* 允许鼠标拖拽穿透到下方 canvas（OrbitControls 旋转） */
   pointer-events: none;
 }
 
-/* 中心轻微暗化，让 3D 地球上的文字更清晰，但不阻挡交互 */
+/* 底部渐变遮罩，仅增强左下角文字可读性，不遮挡地球中心 */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 55% 50% at 50% 50%, rgba(0, 0, 0, 0.45) 0%, transparent 70%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 30%, transparent 55%);
   pointer-events: none;
   z-index: 0;
 }
@@ -320,7 +326,7 @@ img, svg { display: block; max-width: 100%; }
 .hero-inner {
   position: relative;
   z-index: 1;
-  max-width: 720px;
+  max-width: 520px;
   animation: hero-in 1.2s var(--ease-out) both;
   /* 容器不拦截事件，让拖拽穿透到 canvas */
   pointer-events: none;
@@ -343,38 +349,38 @@ img, svg { display: block; max-width: 100%; }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 11vw, 7rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 0.95;
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-3);
   color: #fff;
-  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.7);
 }
 
 .hero-slogan {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.92);
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-3);
   letter-spacing: -0.01em;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
 }
 
 .hero-desc {
-  font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 540px;
-  margin: 0 auto var(--sp-6);
-  line-height: 1.75;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 440px;
+  margin: 0 0 var(--sp-5);
+  line-height: 1.7;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
 }
 
 .hero-actions {
   display: flex;
   gap: var(--sp-3);
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   /* 按钮区域恢复交互 */
   pointer-events: auto;
@@ -419,8 +425,7 @@ img, svg { display: block; max-width: 100%; }
 .hero-scroll {
   position: absolute;
   bottom: var(--sp-6);
-  left: 50%;
-  transform: translateX(-50%);
+  right: var(--sp-7);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -464,6 +469,8 @@ img, svg { display: block; max-width: 100%; }
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+  /* 模块区恢复交互 */
+  pointer-events: auto;
 }
 .module.revealed { opacity: 1; transform: translateY(0); }
 
@@ -705,6 +712,8 @@ img, svg { display: block; max-width: 100%; }
   background: var(--dark-bg);
   border-top: 1px solid var(--dark-border);
   padding: var(--sp-8) var(--sp-5) var(--sp-6);
+  /* 页脚恢复交互 */
+  pointer-events: auto;
 }
 .footer-container {
   max-width: var(--max-w);
