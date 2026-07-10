@@ -58,10 +58,10 @@
         "en": "From data services to map engines, from online tools to developer APIs — CupGIS covers the full geospatial workflow."
       },
       "items": [
-        { "name": { "zh": "CupGIS Viewer", "en": "CupGIS Viewer" }, "desc": { "zh": "专业 WebGIS 在线地图引擎", "en": "Professional WebGIS map engine" }, "url": "https://viewer.cupgis.cn", "tag": { "zh": "引擎", "en": "Engine" } },
-        { "name": { "zh": "CupGIS MTS", "en": "CupGIS MTS" }, "desc": { "zh": "矢量 / 栅格地图切片服务", "en": "Vector / raster tile service" }, "url": "https://mts.cupgis.cn", "tag": { "zh": "服务", "en": "Service" } },
-        { "name": { "zh": "CupGIS DataHub", "en": "CupGIS DataHub" }, "desc": { "zh": "地理空间数据中心", "en": "Geospatial data hub" }, "url": "https://data.cupgis.cn", "tag": { "zh": "数据", "en": "Data" } },
-        { "name": { "zh": "CupGIS API", "en": "CupGIS API" }, "desc": { "zh": "开发者 REST / SDK 接口", "en": "Developer REST / SDK" }, "url": "https://mts.cupgis.cn", "tag": { "zh": "接口", "en": "API" } }
+        { "name": { "zh": "Neptune", "en": "Neptune" }, "desc": { "zh": "海洋环境处理与数值模拟工具", "en": "Ocean environment processing and numerical simulation tool" }, "url": "https://neptune.cupgis.cn", "tag": { "zh": "桌面端", "en": "Desktop" } },
+        { "name": { "zh": "CupGIS MTS", "en": "CupGIS MTS" }, "desc": { "zh": "❌矢量 / 栅格地图切片服务", "en": "❌Vector / raster tile service" }, "url": "https://mts.cupgis.cn", "tag": { "zh": "服务", "en": "Service" } },
+        { "name": { "zh": "CupGIS DataHub", "en": "CupGIS DataHub" }, "desc": { "zh": "❌地理空间数据中心", "en": "❌Geospatial data hub" }, "url": "https://data.cupgis.cn", "tag": { "zh": "数据", "en": "Data" } },
+        { "name": { "zh": "CupGIS API", "en": "CupGIS API" }, "desc": { "zh": "❌开发者 REST / SDK 接口", "en": "❌Developer REST / SDK" }, "url": "https://mts.cupgis.cn", "tag": { "zh": "接口", "en": "API" } }
       ],
       "orbit": { "radius": 1.6, "inclination": 51.6, "speed": 0.21, "startAngle": 2.094 }
     },
@@ -76,10 +76,10 @@
         "en": "From smart cities to ocean monitoring, emergency response and ecology — see how CupGIS solves real problems."
       },
       "items": [
-        { "name": { "zh": "智慧城市", "en": "Smart City" }, "desc": { "zh": "城市三维底座与可视化管理", "en": "3D city base & visual management" }, "url": "https://www.cupgis.com", "tag": { "zh": "城市", "en": "City" } },
-        { "name": { "zh": "海洋监测", "en": "Ocean Monitoring" }, "desc": { "zh": "海洋环境实时监测与预警", "en": "Real-time ocean monitoring & alert" }, "url": "https://www.cupgis.com", "tag": { "zh": "海洋", "en": "Ocean" } },
-        { "name": { "zh": "应急指挥", "en": "Emergency Response" }, "desc": { "zh": "灾害应急指挥与态势研判", "en": "Disaster command & situational awareness" }, "url": "https://www.cupgis.com", "tag": { "zh": "应急", "en": "Response" } },
-        { "name": { "zh": "生态保护", "en": "Ecology Protection" }, "desc": { "zh": "生态资源遥感监测评估", "en": "Remote sensing ecological assessment" }, "url": "https://www.cupgis.com", "tag": { "zh": "生态", "en": "Ecology" } }
+        { "name": { "zh": "智慧城市", "en": "Smart City" }, "desc": { "zh": "❌城市三维底座与可视化管理", "en": "❌3D city base & visual management" }, "url": "https://www.cupgis.com", "tag": { "zh": "城市", "en": "City" } },
+        { "name": { "zh": "海洋监测", "en": "Ocean Monitoring" }, "desc": { "zh": "❌海洋环境实时监测与预警", "en": "❌Real-time ocean monitoring & alert" }, "url": "https://www.cupgis.com", "tag": { "zh": "海洋", "en": "Ocean" } },
+        { "name": { "zh": "应急指挥", "en": "Emergency Response" }, "desc": { "zh": "❌灾害应急指挥与态势研判", "en": "❌Disaster command & situational awareness" }, "url": "https://www.cupgis.com", "tag": { "zh": "应急", "en": "Response" } },
+        { "name": { "zh": "生态保护", "en": "Ecology Protection" }, "desc": { "zh": "❌生态资源遥感监测评估", "en": "❌Remote sensing ecological assessment" }, "url": "https://www.cupgis.com", "tag": { "zh": "生态", "en": "Ecology" } }
       ],
       "orbit": { "radius": 1.8, "inclination": 90, "speed": 0.24, "startAngle": 3.141 }
     },
@@ -114,8 +114,8 @@
       "items": [
         { "name": { "zh": "使命愿景", "en": "Mission & Vision" }, "desc": { "zh": "我们的初心与长远目标", "en": "Our purpose & long-term goals" }, "url": "https://about.cupgis.com", "tag": { "zh": "愿景", "en": "Vision" } },
         { "name": { "zh": "团队成员", "en": "Team" }, "desc": { "zh": "来自地理与工程的伙伴", "en": "Geo & engineering teammates" }, "url": "https://about.cupgis.com", "tag": { "zh": "团队", "en": "Team" } },
-        { "name": { "zh": "联系方式", "en": "Contact" }, "desc": { "zh": "商务合作与技术咨询", "en": "Business & technical inquiry" }, "url": "mailto:contact@cupgis.com", "tag": { "zh": "联系", "en": "Contact" } },
-        { "name": { "zh": "GitHub", "en": "GitHub" }, "desc": { "zh": "关注我们的开源项目", "en": "Follow our open source" }, "url": "https://github.com/cupgis", "tag": { "zh": "开源", "en": "Open Source" } }
+        { "name": { "zh": "联系方式", "en": "Contact" }, "desc": { "zh": "商务合作与技术咨询", "en": "Business & technical inquiry" }, "url": "mailto:martleth@163.com", "tag": { "zh": "联系", "en": "Contact" } },
+        { "name": { "zh": "GitHub", "en": "GitHub" }, "desc": { "zh": "关注我们的开源项目", "en": "Follow our open source" }, "url": "https://github.com", "tag": { "zh": "开源", "en": "Open Source" } }
       ],
       "orbit": { "radius": 2.1, "inclination": 15, "speed": 0.30, "startAngle": 5.236 }
     }
