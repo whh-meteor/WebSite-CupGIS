@@ -1,7 +1,7 @@
 /**
- * CupGIS - Scene Manager
- * Three.js scene orchestration: renderer, camera, lights, render loop
- * Manages Earth (real NASA textures), Satellites, StarField, scroll-driven camera
+ * CupGIS - 场景管理器
+ * Three.js 首屏 3D 场景：地球 + 卫星编队 + 星空
+ * 仅首屏展示，滚动后画布淡出；相机采用固定视角 + 鼠标视差
  */
 import * as THREE from 'three';
 import { Earth } from './earth.js';
@@ -23,20 +23,15 @@ export class SceneManager {
     this.isReady = false;
     this._animationId = null;
 
-    // Camera path waypoints (relative to Earth at origin)
-    // Each waypoint corresponds to viewing a different satellite
-    this.cameraWaypoints = [
-      { pos: [0, 2, 7],    look: [0, 0, 0] },    // Hero: distant overview
-      { pos: [1.5, 1.5, 4], look: [0, 0, 0] },    // Module 0
-      { pos: [-1, 2, 5],    look: [0, 0, 0] },    // Module 1
-      { pos: [2, 0.8, 3.5], look: [0, 0, 0] },    // Module 2
-      { pos: [0, 3.5, 3],   look: [0, 0, 0] },    // Module 3 (polar view)
-      { pos: [-2, 1.2, 4.5],look: [0, 0, 0] },    // Module 4
-      { pos: [0, 1.8, 6],   look: [0, 0, 0] },    // Module 5
-    ];
+    // 首屏固定视角基础参数
+    this._baseCamPos = new THREE.Vector3(0, 1.0, 3.4);
+    this._baseLookAt = new THREE.Vector3(0, 0, 0);
+    this._currentCamPos = this._baseCamPos.clone();
+    this._currentLookAt = this._baseLookAt.clone();
 
-    this._currentCamPos = new THREE.Vector3(0, 2, 7);
-    this._currentLookAt = new THREE.Vector3(0, 0, 0);
+    // 鼠标视差目标
+    this._targetMouseX = 0;
+    this._targetMouseY = 0;
   }
 
   async init(moduleConfigs, onProgress) {
@@ -44,26 +39,27 @@ export class SceneManager {
     this._setupScene();
     this._setupCamera();
     this._setupLights();
+    this._setupMouseParallax();
 
-    // Create Earth with real NASA textures
+    // 地球（真实 NASA 纹理）
     this.earth = new Earth(this.scene, { radius: 1 });
     onProgress(0.05);
-    await this.earth.init((p) => onProgress(0.05 + p * 0.7)); // Texture loading = 5%-75%
+    await this.earth.init((p) => onProgress(0.05 + p * 0.7)); // 纹理占 5%-75%
     onProgress(0.75);
 
-    // Create StarField
+    // 星空
     const starCount = window.innerWidth < 768 ? 1500 : 3000;
     this.starField = new StarField(this.scene, starCount);
     onProgress(0.80);
 
-    // Create Satellites (one per module)
+    // 卫星编队（每模块一架）
     for (const config of moduleConfigs) {
       const sat = new Satellite(this.scene, config);
       this.satellites.push(sat);
     }
     onProgress(0.90);
 
-    // Initial camera position
+    // 初始相机
     this.camera.position.copy(this._currentCamPos);
     this.camera.lookAt(this._currentLookAt);
 
@@ -81,10 +77,9 @@ export class SceneManager {
     });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0x000000, 1);
+    this.renderer.setClearColor(0x0a0a0c, 1);
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-    // Handle resize
     window.addEventListener('resize', () => {
       this.camera.aspect = window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
@@ -98,7 +93,7 @@ export class SceneManager {
 
   _setupCamera() {
     this.camera = new THREE.PerspectiveCamera(
-      25, // Tighter FOV like official example (25°)
+      32,
       window.innerWidth / window.innerHeight,
       0.1,
       200
@@ -106,14 +101,19 @@ export class SceneManager {
   }
 
   _setupLights() {
-    // Sun directional light (same position as sunDir for consistency)
     const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
-    sunLight.position.set(0, 0, 3); // Matches earth.js sunDir
+    sunLight.position.set(0, 0, 3);
     this.scene.add(sunLight);
-
-    // Very subtle ambient fill for night side
     const ambient = new THREE.AmbientLight(0x111122, 0.15);
     this.scene.add(ambient);
+  }
+
+  /** 鼠标视差：相机随鼠标轻微偏移 */
+  _setupMouseParallax() {
+    window.addEventListener('mousemove', (e) => {
+      this._targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      this._targetMouseY = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
   }
 
   _startRenderLoop() {
@@ -122,20 +122,12 @@ export class SceneManager {
       const delta = this.clock.getDelta();
       const elapsed = this.clock.getElapsedTime();
 
-      if (document.hidden) return; // Pause when tab hidden
+      if (document.hidden) return; // 标签页隐藏时暂停
 
-      // Update Earth
       this.earth.update(this.scrollProgress, delta);
-
-      // Update StarField
       this.starField.update(elapsed);
+      for (const sat of this.satellites) sat.update(delta);
 
-      // Update Satellites
-      for (const sat of this.satellites) {
-        sat.update(delta);
-      }
-
-      // Smooth camera transition
       this._updateCamera(delta);
 
       this.renderer.render(this.scene, this.camera);
@@ -143,47 +135,17 @@ export class SceneManager {
     animate();
   }
 
+  /** 相机：固定视角 + 鼠标视差平滑跟随 */
   _updateCamera(delta) {
-    const progress = this.scrollProgress;
-    const numModules = this.satellites.length;
+    // 视差偏移量
+    const parallaxX = this._targetMouseX * 0.35;
+    const parallaxY = -this._targetMouseY * 0.2;
 
-    // Map scroll progress to camera waypoint index
-    const heroEnd = 0.08;
-    const moduleSpan = (1 - heroEnd) / numModules;
-    const moduleIndex = Math.min(
-      numModules - 1,
-      Math.max(0, Math.floor((progress - heroEnd) / moduleSpan))
-    );
-    const localProgress = ((progress - heroEnd) / moduleSpan) - moduleIndex;
+    const targetPos = this._baseCamPos.clone().add(new THREE.Vector3(parallaxX, parallaxY, 0));
+    const targetLook = this._baseLookAt.clone().add(new THREE.Vector3(parallaxX * 0.3, parallaxY * 0.3, 0));
 
-    // Determine target waypoint
-    let wpIndex;
-    let t = 0;
-    if (progress < heroEnd) {
-      wpIndex = 0;
-      t = progress / heroEnd;
-    } else {
-      wpIndex = 1 + moduleIndex;
-      t = Math.min(1, Math.max(0, localProgress));
-    }
-
-    // Smooth interpolation between waypoints
-    const fromWP = this.cameraWaypoints[Math.max(0, wpIndex)];
-    const toWP = this.cameraWaypoints[Math.min(this.cameraWaypoints.length - 1, wpIndex + 1)];
-
-    const fromPos = new THREE.Vector3(...fromWP.pos);
-    const toPos = new THREE.Vector3(...toWP.pos);
-    const fromLook = new THREE.Vector3(...fromWP.look);
-    const toLook = new THREE.Vector3(...toWP.look);
-
-    // Ease function
-    const easeT = t * t * (3 - 2 * t); // smoothstep
-
-    const targetPos = fromPos.clone().lerp(toPos, easeT);
-    const targetLook = fromLook.clone().lerp(toLook, easeT);
-
-    // Smooth camera movement (not instant)
-    const smoothing = 1 - Math.pow(0.03, delta);
+    // 平滑插值
+    const smoothing = 1 - Math.pow(0.04, delta);
     this._currentCamPos.lerp(targetPos, smoothing);
     this._currentLookAt.lerp(targetLook, smoothing);
 

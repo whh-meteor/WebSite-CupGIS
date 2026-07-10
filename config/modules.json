@@ -3,145 +3,121 @@
     "name": "CupGIS",
     "slogan": {
       "zh": "开启地理空间智能新纪元",
-      "en": "Opening a New Era of Geospatial Intelligence"
+      "en": "A New Era of Geospatial Intelligence"
     },
     "description": {
-      "zh": "CupGIS 是一个集数据索引、在线工具、技术博客于一体的地理信息系统平台，致力于为用户提供高效、智能的地理空间解决方案。",
-      "en": "CupGIS is a geographic information system platform integrating data indexing, online tools, and technical blogs, dedicated to providing efficient and intelligent geospatial solutions."
+      "zh": "CupGIS 是集数据索引、在线工具、产品矩阵、应用案例与技术博客于一体的地理空间智能平台，致力于让地理空间技术触手可及。",
+      "en": "CupGIS is a geospatial intelligence platform integrating data index, online tools, product matrix, application cases and technical blog, dedicated to making geospatial technology accessible."
     }
   },
   "modules": [
     {
       "id": "data",
       "icon": "database",
+      "theme": "dark",
       "title": { "zh": "数据索引", "en": "Data Index" },
       "subtitle": { "zh": "海量地理空间数据，一键检索", "en": "Massive geospatial data, one-click search" },
       "description": {
-        "zh": "汇聚全球遥感影像、矢量地图、DEM高程等多源地理数据，提供高效的索引与检索服务。",
-        "en": "Aggregating global remote sensing imagery, vector maps, DEM elevation and other multi-source geographic data, providing efficient indexing and retrieval services."
+        "zh": "汇聚全球遥感影像、矢量地图、DEM 高程等多源地理数据，提供高效的索引与检索服务，让数据发现变得简单。",
+        "en": "Aggregating global remote sensing imagery, vector maps, DEM elevation and multi-source geographic data with efficient indexing and retrieval."
       },
-      "url": "https://data.cupgis.cn",
-      "color": "#e63946",
-      "features": {
-        "zh": ["遥感影像库", "矢量地图服务", "DEM高程数据", "实时数据更新"],
-        "en": ["Remote Sensing Imagery", "Vector Map Service", "DEM Elevation Data", "Real-time Data Updates"]
-      },
-      "orbit": {
-        "radius": 1.3,
-        "inclination": 28.5,
-        "speed": 0.15,
-        "startAngle": 0
-      }
+      "items": [
+        { "name": { "zh": "遥感影像库", "en": "Remote Sensing Imagery" }, "desc": { "zh": "多源多分辨率光学与雷达影像", "en": "Multi-source optical & radar imagery" }, "url": "https://data.cupgis.cn", "tag": { "zh": "影像", "en": "Imagery" } },
+        { "name": { "zh": "矢量地图服务", "en": "Vector Map Service" }, "desc": { "zh": "全球基础地理矢量底图", "en": "Global base vector maps" }, "url": "https://data.cupgis.cn", "tag": { "zh": "矢量", "en": "Vector" } },
+        { "name": { "zh": "DEM 高程数据", "en": "DEM Elevation Data" }, "desc": { "zh": "SRTM / ASTER GDEM 高程模型", "en": "SRTM / ASTER GDEM models" }, "url": "https://data.cupgis.cn", "tag": { "zh": "高程", "en": "Elevation" } },
+        { "name": { "zh": "海洋气象数据", "en": "Ocean & Climate Data" }, "desc": { "zh": "实时海洋气象与再分析数据", "en": "Real-time ocean & reanalysis data" }, "url": "https://data.cupgis.cn", "tag": { "zh": "气象", "en": "Climate" } }
+      ],
+      "orbit": { "radius": 1.3, "inclination": 28.5, "speed": 0.15, "startAngle": 0 }
     },
     {
       "id": "tools",
       "icon": "tools",
+      "theme": "light",
       "title": { "zh": "在线工具", "en": "Online Tools" },
-      "subtitle": { "zh": "专业GIS分析工具，即开即用", "en": "Professional GIS analysis tools, ready to use" },
+      "subtitle": { "zh": "专业 GIS 分析工具，即开即用", "en": "Professional GIS tools, ready to use" },
       "description": {
-        "zh": "提供坐标转换、空间分析、地图制图、数据可视化等系列在线工具，无需安装，浏览器即可使用。",
-        "en": "Providing coordinate conversion, spatial analysis, cartography, data visualization and other online tools, no installation required, usable in browser."
+        "zh": "坐标转换、空间分析、地图制图、数据可视化等系列在线工具，无需安装，浏览器即可使用。",
+        "en": "Coordinate conversion, spatial analysis, cartography, data visualization and more — no install, runs in browser."
       },
-      "url": "https://viewer.cupgis.cn",
-      "color": "#d62839",
-      "features": {
-        "zh": ["坐标转换", "空间分析", "地图制图", "数据可视化"],
-        "en": ["Coordinate Conversion", "Spatial Analysis", "Cartography", "Data Visualization"]
+      "items": [
+        { "name": { "zh": "在线地图查看器", "en": "Map Viewer" }, "desc": { "zh": "多图层在线地图浏览", "en": "Multi-layer online map browsing" }, "url": "https://viewer.cupgis.cn", "tag": { "zh": "查看器", "en": "Viewer" } },
+        { "name": { "zh": "坐标转换工具", "en": "Coordinate Converter" }, "desc": { "zh": "WGS84 / CGCS2000 等互转", "en": "WGS84 / CGCS2000 transforms" }, "url": "https://viewer.cupgis.cn", "tag": { "zh": "转换", "en": "Convert" } },
+        { "name": { "zh": "空间分析工具", "en": "Spatial Analysis" }, "desc": { "zh": "缓冲区、叠加、网络分析", "en": "Buffer, overlay, network analysis" }, "url": "https://viewer.cupgis.cn", "tag": { "zh": "分析", "en": "Analysis" } },
+        { "name": { "zh": "数据可视化", "en": "Data Visualization" }, "desc": { "zh": "矢量与栅格数据可视化", "en": "Vector & raster visualization" }, "url": "https://viewer.cupgis.cn", "tag": { "zh": "可视化", "en": "Visualize" } }
+      ],
+      "orbit": { "radius": 1.45, "inclination": 45, "speed": 0.18, "startAngle": 1.047 }
+    },
+    {
+      "id": "products",
+      "icon": "grid",
+      "theme": "dark",
+      "title": { "zh": "产品矩阵", "en": "Products" },
+      "subtitle": { "zh": "覆盖全流程的地理空间产品", "en": "End-to-end geospatial products" },
+      "description": {
+        "zh": "从数据服务到地图引擎、从在线工具到开发接口，CupGIS 构建覆盖地理空间全流程的产品体系。",
+        "en": "From data services to map engines, from online tools to developer APIs — CupGIS covers the full geospatial workflow."
       },
-      "orbit": {
-        "radius": 1.45,
-        "inclination": 45,
-        "speed": 0.18,
-        "startAngle": 1.047
-      }
+      "items": [
+        { "name": { "zh": "CupGIS Viewer", "en": "CupGIS Viewer" }, "desc": { "zh": "专业 WebGIS 在线地图引擎", "en": "Professional WebGIS map engine" }, "url": "https://viewer.cupgis.cn", "tag": { "zh": "引擎", "en": "Engine" } },
+        { "name": { "zh": "CupGIS MTS", "en": "CupGIS MTS" }, "desc": { "zh": "矢量 / 栅格地图切片服务", "en": "Vector / raster tile service" }, "url": "https://mts.cupgis.cn", "tag": { "zh": "服务", "en": "Service" } },
+        { "name": { "zh": "CupGIS DataHub", "en": "CupGIS DataHub" }, "desc": { "zh": "地理空间数据中心", "en": "Geospatial data hub" }, "url": "https://data.cupgis.cn", "tag": { "zh": "数据", "en": "Data" } },
+        { "name": { "zh": "CupGIS API", "en": "CupGIS API" }, "desc": { "zh": "开发者 REST / SDK 接口", "en": "Developer REST / SDK" }, "url": "https://mts.cupgis.cn", "tag": { "zh": "接口", "en": "API" } }
+      ],
+      "orbit": { "radius": 1.6, "inclination": 51.6, "speed": 0.21, "startAngle": 2.094 }
+    },
+    {
+      "id": "cases",
+      "icon": "layers",
+      "theme": "light",
+      "title": { "zh": "应用案例", "en": "Case Studies" },
+      "subtitle": { "zh": "真实场景中的地理空间实践", "en": "Geospatial practice in real scenarios" },
+      "description": {
+        "zh": "覆盖智慧城市、海洋监测、应急指挥、生态保护等行业场景，看看 CupGIS 如何解决真实问题。",
+        "en": "From smart cities to ocean monitoring, emergency response and ecology — see how CupGIS solves real problems."
+      },
+      "items": [
+        { "name": { "zh": "智慧城市", "en": "Smart City" }, "desc": { "zh": "城市三维底座与可视化管理", "en": "3D city base & visual management" }, "url": "https://www.cupgis.com", "tag": { "zh": "城市", "en": "City" } },
+        { "name": { "zh": "海洋监测", "en": "Ocean Monitoring" }, "desc": { "zh": "海洋环境实时监测与预警", "en": "Real-time ocean monitoring & alert" }, "url": "https://www.cupgis.com", "tag": { "zh": "海洋", "en": "Ocean" } },
+        { "name": { "zh": "应急指挥", "en": "Emergency Response" }, "desc": { "zh": "灾害应急指挥与态势研判", "en": "Disaster command & situational awareness" }, "url": "https://www.cupgis.com", "tag": { "zh": "应急", "en": "Response" } },
+        { "name": { "zh": "生态保护", "en": "Ecology Protection" }, "desc": { "zh": "生态资源遥感监测评估", "en": "Remote sensing ecological assessment" }, "url": "https://www.cupgis.com", "tag": { "zh": "生态", "en": "Ecology" } }
+      ],
+      "orbit": { "radius": 1.8, "inclination": 90, "speed": 0.24, "startAngle": 3.141 }
     },
     {
       "id": "blog",
       "icon": "blog",
+      "theme": "dark",
       "title": { "zh": "技术博客", "en": "Tech Blog" },
-      "subtitle": { "zh": "分享GIS前沿技术与实践经验", "en": "Sharing cutting-edge GIS technology and practices" },
+      "subtitle": { "zh": "分享 GIS 前沿技术与实践", "en": "Sharing cutting-edge GIS technology" },
       "description": {
-        "zh": "涵盖GIS开发教程、空间算法解析、行业应用案例等内容，与开发者共同成长。",
-        "en": "Covering GIS development tutorials, spatial algorithm analysis, industry application cases, growing together with developers."
+        "zh": "涵盖 GIS 开发教程、空间算法解析、行业应用案例等内容，与开发者共同成长。",
+        "en": "GIS development tutorials, spatial algorithm analysis, industry applications — growing with developers."
       },
-      "url": "https://blog.csdn.net/qq_42590021?type=blog",
-      "color": "#c1121f",
-      "features": {
-        "zh": ["开发教程", "算法解析", "应用案例", "技术分享"],
-        "en": ["Development Tutorials", "Algorithm Analysis", "Application Cases", "Tech Sharing"]
-      },
-      "orbit": {
-        "radius": 1.6,
-        "inclination": 51.6,
-        "speed": 0.21,
-        "startAngle": 2.094
-      }
-    },
-    {
-      "id": "docs",
-      "icon": "docs",
-      "title": { "zh": "开发文档", "en": "Documentation" },
-      "subtitle": { "zh": "完整的API文档与开发指南", "en": "Complete API documentation and developer guides" },
-      "description": {
-        "zh": "提供详尽的API参考、SDK使用指南、快速入门教程，助力开发者快速集成GIS能力。",
-        "en": "Providing detailed API references, SDK usage guides, quick start tutorials, helping developers quickly integrate GIS capabilities."
-      },
-      "url": "https://mts.cupgis.cn",
-      "color": "#a41623",
-      "features": {
-        "zh": ["API参考", "SDK指南", "快速入门", "示例代码"],
-        "en": ["API Reference", "SDK Guide", "Quick Start", "Sample Code"]
-      },
-      "orbit": {
-        "radius": 1.8,
-        "inclination": 90,
-        "speed": 0.24,
-        "startAngle": 3.141
-      }
-    },
-    {
-      "id": "community",
-      "icon": "community",
-      "title": { "zh": "社区", "en": "Community" },
-      "subtitle": { "zh": "加入开发者社区，共建生态", "en": "Join the developer community, build ecosystem together" },
-      "description": {
-        "zh": "与全球GIS开发者交流分享，参与开源项目，共同推动地理空间技术发展。",
-        "en": "Communicate and share with global GIS developers, participate in open source projects, jointly promote geospatial technology development."
-      },
-      "url": "https://community.cupgis.com",
-      "color": "#8b1a24",
-      "features": {
-        "zh": ["技术交流", "开源贡献", "问答互动", "活动资讯"],
-        "en": ["Tech Discussion", "Open Source Contribution", "Q&A Interaction", "Event News"]
-      },
-      "orbit": {
-        "radius": 1.95,
-        "inclination": 60,
-        "speed": 0.27,
-        "startAngle": 4.189
-      }
+      "items": [
+        { "name": { "zh": "开发教程", "en": "Tutorials" }, "desc": { "zh": "WebGIS / QGIS 开发实战", "en": "WebGIS / QGIS development" }, "url": "https://blog.csdn.net/qq_42590021?type=blog", "tag": { "zh": "教程", "en": "Tutorial" } },
+        { "name": { "zh": "算法解析", "en": "Algorithm" }, "desc": { "zh": "空间索引与几何算法详解", "en": "Spatial index & geometry algorithms" }, "url": "https://blog.csdn.net/qq_42590021?type=blog", "tag": { "zh": "算法", "en": "Algorithm" } },
+        { "name": { "zh": "行业洞察", "en": "Insights" }, "desc": { "zh": "地理空间行业趋势分析", "en": "Geospatial industry trends" }, "url": "https://blog.csdn.net/qq_42590021?type=blog", "tag": { "zh": "洞察", "en": "Insight" } },
+        { "name": { "zh": "开源项目", "en": "Open Source" }, "desc": { "zh": "开源贡献与项目实践", "en": "Open source contributions" }, "url": "https://github.com/cupgis", "tag": { "zh": "开源", "en": "Open Source" } }
+      ],
+      "orbit": { "radius": 1.95, "inclination": 60, "speed": 0.27, "startAngle": 4.189 }
     },
     {
       "id": "about",
-      "icon": "about",
-      "title": { "zh": "关于我们", "en": "About Us" },
-      "subtitle": { "zh": "了解CupGIS的使命与愿景", "en": "Learn about CupGIS mission and vision" },
+      "icon": "compass",
+      "theme": "light",
+      "title": { "zh": "关于 CupGIS", "en": "About" },
+      "subtitle": { "zh": "了解我们的使命与愿景", "en": "Learn our mission & vision" },
       "description": {
-        "zh": "CupGIS致力于打造开放、共享、智能的地理信息平台，让地理空间技术触手可及。",
-        "en": "CupGIS is dedicated to building an open, shared, intelligent geographic information platform, making geospatial technology accessible."
+        "zh": "CupGIS 致力于打造开放、共享、智能的地理信息平台，让地理空间技术触手可及。",
+        "en": "CupGIS builds an open, shared, intelligent geographic information platform — making geospatial technology accessible."
       },
-      "url": "https://about.cupgis.com",
-      "color": "#ffffff",
-      "features": {
-        "zh": ["使命愿景", "团队成员", "联系方式", "加入我们"],
-        "en": ["Mission & Vision", "Team", "Contact", "Careers"]
-      },
-      "orbit": {
-        "radius": 2.1,
-        "inclination": 15,
-        "speed": 0.30,
-        "startAngle": 5.236
-      }
+      "items": [
+        { "name": { "zh": "使命愿景", "en": "Mission & Vision" }, "desc": { "zh": "我们的初心与长远目标", "en": "Our purpose & long-term goals" }, "url": "https://about.cupgis.com", "tag": { "zh": "愿景", "en": "Vision" } },
+        { "name": { "zh": "团队成员", "en": "Team" }, "desc": { "zh": "来自地理与工程的伙伴", "en": "Geo & engineering teammates" }, "url": "https://about.cupgis.com", "tag": { "zh": "团队", "en": "Team" } },
+        { "name": { "zh": "联系方式", "en": "Contact" }, "desc": { "zh": "商务合作与技术咨询", "en": "Business & technical inquiry" }, "url": "mailto:contact@cupgis.com", "tag": { "zh": "联系", "en": "Contact" } },
+        { "name": { "zh": "GitHub", "en": "GitHub" }, "desc": { "zh": "关注我们的开源项目", "en": "Follow our open source" }, "url": "https://github.com/cupgis", "tag": { "zh": "开源", "en": "Open Source" } }
+      ],
+      "orbit": { "radius": 2.1, "inclination": 15, "speed": 0.30, "startAngle": 5.236 }
     }
   ]
 }

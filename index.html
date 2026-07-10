@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -7,19 +7,19 @@
 
   <title>CupGIS - 地理空间智能平台 | Geospatial Intelligence Platform</title>
   <meta name="title" content="CupGIS - 地理空间智能平台 | Geospatial Intelligence Platform">
-  <meta name="description" content="CupGIS 是一个集数据索引、在线工具、技术博客于一体的地理信息系统平台，致力于为用户提供高效、智能的地理空间解决方案。">
-  <meta name="keywords" content="CupGIS, GIS, 地理信息系统, 遥感, 空间分析, 地图, 地理空间, Geospatial, Remote Sensing, Spatial Analysis, Mapping, WebGIS, Three.js, 3D地球, 卫星轨道">
+  <meta name="description" content="CupGIS 是集数据索引、在线工具、产品矩阵、应用案例与技术博客于一体的地理空间智能平台，开启地理空间智能新纪元。">
+  <meta name="keywords" content="CupGIS, GIS, 地理信息系统, 遥感, 空间分析, 地图, 地理空间, Geospatial, Remote Sensing, WebGIS, Three.js, 3D地球">
   <meta name="author" content="CupGIS Team">
   <meta name="robots" content="index, follow">
   <meta name="language" content="zh-CN">
   <meta name="revisit-after" content="7 days">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#0a0a0c">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.cupgis.com/">
   <meta property="og:title" content="CupGIS - 地理空间智能平台">
-  <meta property="og:description" content="集数据索引、在线工具、技术博客于一体的地理信息系统平台，开启地理空间智能新纪元。">
+  <meta property="og:description" content="集数据索引、在线工具、产品矩阵、应用案例与技术博客于一体的地理空间智能平台。">
   <meta property="og:image" content="https://www.cupgis.com/assets/og-image.png">
   <meta property="og:site_name" content="CupGIS">
   <meta property="og:locale" content="zh_CN">
@@ -28,7 +28,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.cupgis.com/">
   <meta name="twitter:title" content="CupGIS - 地理空间智能平台">
-  <meta name="twitter:description" content="集数据索引、在线工具、技术博客于一体的地理信息系统平台，开启地理空间智能新纪元。">
+  <meta name="twitter:description" content="集数据索引、在线工具、产品矩阵、应用案例与技术博客于一体的地理空间智能平台。">
   <meta name="twitter:image" content="https://www.cupgis.com/assets/og-image.png">
   <meta name="twitter:site" content="@CupGIS">
 
@@ -43,16 +43,17 @@
   <link rel="preload" href="css/style.css" as="style">
   <link rel="preload" href="config/modules.json" as="fetch" crossorigin>
   <link rel="stylesheet" href="css/style.css">
-  <!-- Space-themed display fonts for readable text over 3D Earth -->
+
+  <!-- 极简高级字体：Space Grotesk 显示 + Inter 正文 + JetBrains Mono 等宽 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Schema.org Structured Data -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"CupGIS","url":"https://www.cupgis.com","logo":"https://www.cupgis.com/assets/favicon.svg","description":"CupGIS is a geospatial intelligence platform combining data index, online tools, and technical blogs","sameAs":["https://github.com/cupgis","https://twitter.com/CupGIS"]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CupGIS","url":"https://www.cupgis.com","description":"Geospatial intelligence platform with data index, tools and blog","inLanguage":["zh-CN","en"],"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.cupgis.com/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"CupGIS","url":"https://www.cupgis.com","logo":"https://www.cupgis.com/assets/favicon.svg","description":"CupGIS is a geospatial intelligence platform combining data index, online tools, products, cases and blog","sameAs":["https://github.com/cupgis","https://twitter.com/CupGIS"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"CupGIS","url":"https://www.cupgis.com","description":"Geospatial intelligence platform","inLanguage":["zh-CN","en"],"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.cupgis.com/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
 
-  <!-- Three.js importmap for ES module loading -->
+  <!-- Three.js importmap（仅首屏 3D 地球使用） -->
   <script type="importmap">
   {
     "imports": {
@@ -63,91 +64,84 @@
   </script>
 
   <!-- 广告 -->
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1236700282164952"
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1236700282164952"
      crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- Scroll Progress Bar -->
+  <!-- 滚动进度条 -->
   <div class="scroll-progress" id="scrollProgress"></div>
 
-  <!-- Loading Screen -->
-  <div class="loading-screen" id="loadingScreen">
-    <div class="loading-content">
-      <div class="loading-logo">CupGIS</div>
-      <div class="loading-spinner"></div>
-      <div class="loading-bar-track">
-        <div class="loading-bar-fill" id="loadingBar"></div>
+  <!-- 加载屏幕 -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">CupGIS</div>
+      <div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>
+      <div class="loader-meta">
+        <span class="loader-percent" id="loaderPercent">0%</span>
+        <span class="loader-text" id="loaderText" data-i18n="loading.scene">构建 3D 场景</span>
       </div>
-      <div class="loading-percent" id="loadingPercent">0%</div>
-      <div class="loading-text" id="loadingText">初始化轨道系统 / Initializing orbital systems...</div>
     </div>
   </div>
 
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar">
+  <!-- 顶部导航 -->
+  <nav class="nav" id="nav">
     <div class="nav-container">
       <a href="#hero" class="nav-logo" aria-label="CupGIS Home">
-        <svg class="nav-logo-icon" viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
-          <circle cx="32" cy="30" r="16" fill="none" stroke="#e63946" stroke-width="1.5"/>
-          <ellipse cx="32" cy="30" rx="26" ry="10" fill="none" stroke="#e63946" stroke-width="1" opacity="0.4" transform="rotate(-20 32 30)"/>
-          <circle cx="52" cy="20" r="3" fill="#e63946" transform="rotate(-20 32 30)"/>
-          <circle cx="32" cy="14" r="2" fill="#fff" opacity="0.8"/>
+        <svg class="nav-logo-mark" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true">
+          <circle cx="32" cy="32" r="15" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <ellipse cx="32" cy="32" rx="26" ry="9" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35" transform="rotate(-22 32 32)"/>
+          <circle cx="53" cy="22" r="2.5" fill="currentColor" transform="rotate(-22 32 32)"/>
         </svg>
         <span class="nav-logo-text">CupGIS</span>
       </a>
       <div class="nav-links" id="navLinks">
-        <a href="#data" class="nav-link" data-i18n="nav.data">Data Index</a>
-        <a href="#tools" class="nav-link" data-i18n="nav.tools">Tools</a>
-        <a href="#blog" class="nav-link" data-i18n="nav.blog">Blog</a>
-        <a href="#docs" class="nav-link" data-i18n="nav.docs">Docs</a>
-        <a href="#community" class="nav-link" data-i18n="nav.community">Community</a>
-        <a href="#about" class="nav-link" data-i18n="nav.about">About</a>
+        <a href="#data" class="nav-link" data-i18n="nav.data">数据</a>
+        <a href="#tools" class="nav-link" data-i18n="nav.tools">工具</a>
+        <a href="#products" class="nav-link" data-i18n="nav.products">产品</a>
+        <a href="#cases" class="nav-link" data-i18n="nav.cases">案例</a>
+        <a href="#blog" class="nav-link" data-i18n="nav.blog">博客</a>
+        <a href="#about" class="nav-link" data-i18n="nav.about">关于</a>
       </div>
       <div class="nav-actions">
         <button class="lang-toggle" id="langToggle" aria-label="Switch language">
           <span class="lang-current" id="langCurrent">EN</span>
         </button>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
+          <span></span><span></span>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- Three.js Canvas (fixed background) -->
+  <!-- Three.js 画布（首屏 3D 地球背景，滚动后淡出） -->
   <canvas id="threeCanvas" class="three-canvas" aria-hidden="true"></canvas>
 
-  <!-- HUD Overlay -->
-  <div class="orbit-hud" id="orbitHud">
-    <div class="hud-line"><span class="hud-recording"></span><span data-i18n="hud.orbital">ORBITAL CAM</span></div>
-    <div class="hud-line"><span class="hud-label" data-i18n="hud.alt">ALT</span><span class="hud-value" id="hudAlt">408 KM</span></div>
-    <div class="hud-line"><span class="hud-label" data-i18n="hud.vel">VEL</span><span class="hud-value" id="hudVel">7.66 KM/S</span></div>
-    <div class="hud-line"><span class="hud-label" data-i18n="hud.inc">INC</span><span class="hud-value" id="hudInc">51.6°</span></div>
-    <div class="hud-line"><span class="hud-label" data-i18n="hud.lat">LAT</span><span class="hud-value" id="hudLat">--.--</span></div>
-    <div class="hud-line"><span class="hud-label" data-i18n="hud.lon">LON</span><span class="hud-value" id="hudLon">---.--</span></div>
-  </div>
+  <!-- 主内容 -->
+  <main class="main" id="mainContent">
 
-  <!-- Main Content (scrolls over 3D scene) -->
-  <main class="main-content" id="mainContent">
-    <section class="section hero-section" id="hero">
-      <div class="hero-content">
-        <div class="hero-badge" data-i18n="hero.badge">Orbital Intelligence Platform</div>
-        <h1 class="hero-title"><span class="hero-title-main">CupGIS</span></h1>
+    <!-- 首屏 Hero：3D 地球 + 极简文字 -->
+    <section class="hero" id="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-inner">
+        <span class="hero-badge" data-i18n="hero.badge">Geospatial Intelligence Platform</span>
+        <h1 class="hero-title">CupGIS</h1>
         <p class="hero-slogan" data-i18n="hero.slogan">开启地理空间智能新纪元</p>
-        <p class="hero-desc" data-i18n="hero.desc">从近地轨道俯瞰，重新定义地理信息系统的边界。集数据索引、在线工具、技术博客于一体。</p>
+        <p class="hero-desc" data-i18n="hero.desc">从近地轨道俯瞰，重新定义地理信息系统的边界。集数据索引、在线工具、产品矩阵、应用案例与技术博客于一体。</p>
         <div class="hero-actions">
           <a href="#data" class="btn btn-primary" data-i18n="hero.cta1">开始探索</a>
-          <a href="#about" class="btn btn-secondary" data-i18n="hero.cta2">了解更多</a>
+          <a href="#about" class="btn btn-ghost" data-i18n="hero.cta2">了解更多</a>
         </div>
-        <div class="hero-scroll-hint">
-          <span data-i18n="hero.scroll">向下滚动探索</span>
-          <div class="scroll-arrow"></div>
-        </div>
+      </div>
+      <div class="hero-scroll">
+        <span data-i18n="hero.scroll">向下滚动探索</span>
+        <span class="hero-scroll-line"></span>
       </div>
     </section>
 
+    <!-- 模块区（JS 渲染，深浅交替半屏模块） -->
     <div id="moduleSections"></div>
 
+    <!-- 页脚 -->
     <footer class="footer" id="footer">
       <div class="footer-container">
         <div class="footer-brand">
@@ -156,19 +150,19 @@
         </div>
         <div class="footer-links">
           <div class="footer-col">
-            <h4 data-i18n="footer.product">Product</h4>
-            <a href="#data" data-i18n="nav.data">Data Index</a>
-            <a href="#tools" data-i18n="nav.tools">Tools</a>
-            <a href="#blog" data-i18n="nav.blog">Blog</a>
+            <h4 data-i18n="footer.platform">平台</h4>
+            <a href="#data" data-i18n="nav.data">数据</a>
+            <a href="#tools" data-i18n="nav.tools">工具</a>
+            <a href="#products" data-i18n="nav.products">产品</a>
           </div>
           <div class="footer-col">
-            <h4 data-i18n="footer.resources">Resources</h4>
-            <a href="#docs" data-i18n="nav.docs">Docs</a>
-            <a href="#community" data-i18n="nav.community">Community</a>
-            <a href="#about" data-i18n="nav.about">About</a>
+            <h4 data-i18n="footer.resources">资源</h4>
+            <a href="#cases" data-i18n="nav.cases">案例</a>
+            <a href="#blog" data-i18n="nav.blog">博客</a>
+            <a href="#about" data-i18n="nav.about">关于</a>
           </div>
           <div class="footer-col">
-            <h4 data-i18n="footer.connect">Connect</h4>
+            <h4 data-i18n="footer.connect">联系</h4>
             <a href="https://github.com/cupgis" target="_blank" rel="noopener">GitHub</a>
             <a href="mailto:contact@cupgis.com">Email</a>
             <a href="https://twitter.com/CupGIS" target="_blank" rel="noopener">Twitter</a>
@@ -181,7 +175,10 @@
     </footer>
   </main>
 
-  <!-- Module entry point (ES module) -->
+  <!-- 侧边模块导航点 -->
+  <aside class="dots-nav" id="dotsNav" aria-hidden="true"></aside>
+
+  <!-- 入口脚本（ES module） -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
