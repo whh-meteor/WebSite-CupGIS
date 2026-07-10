@@ -217,18 +217,18 @@ export class Earth {
     this.scene.add(this.group);
   }
 
-  /* ── 纹理加载 ── */
+  /* ── 纹理加载（并行下载，大幅提升首屏速度）── */
   async _loadTextures(onProgress) {
     const loader = new THREE.TextureLoader();
     const entries = Object.entries(TEXTURE_PATHS);
     const total = entries.length;
-    const textures = {};
+    const colorTextures = ['day', 'night', 'moon', 'milkyway'];
+    let completed = 0;
 
-    for (let i = 0; i < total; i++) {
-      const [name, path] = entries[i];
-      textures[name] = await new Promise((resolve, reject) => {
+    // 并行加载所有纹理
+    const promises = entries.map(([name, path]) => {
+      return new Promise((resolve, reject) => {
         loader.load(path, (tex) => {
-          const colorTextures = ['day', 'night', 'moon', 'milkyway'];
           tex.colorSpace = colorTextures.includes(name)
             ? THREE.SRGBColorSpace
             : THREE.LinearSRGBColorSpace;
@@ -237,14 +237,19 @@ export class Earth {
           tex.wrapT = THREE.ClampToEdgeWrapping;
           tex.minFilter = THREE.LinearMipmapLinearFilter;
           tex.magFilter = THREE.LinearFilter;
-          if (onProgress) onProgress((i + 1) / total);
-          resolve(tex);
+          completed++;
+          if (onProgress) onProgress(completed / total);
+          resolve([name, tex]);
         }, undefined, (err) => {
           console.warn(`CupGIS: 纹理加载失败 ${path}`, err);
           reject(err);
         });
       });
-    }
+    });
+
+    const results = await Promise.all(promises);
+    const textures = {};
+    for (const [name, tex] of results) textures[name] = tex;
     return textures;
   }
 

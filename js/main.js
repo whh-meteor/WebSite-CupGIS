@@ -28,7 +28,7 @@ class CupGISApp {
     this.loaderPercent = document.getElementById('loaderPercent');
     this.loaderText = document.getElementById('loaderText');
 
-    // 立即绑定 UI 交互
+    // 立即绑定 UI 交互（不阻塞加载）
     this._setupNav();
     this._setupLangToggle();
     this._setupSmoothScroll();
@@ -37,14 +37,15 @@ class CupGISApp {
     // 初始化 i18n
     applyTranslations(getCurrentLang());
 
-    // 加载模块配置并渲染
+    // 并行启动：模块配置 + 3D 场景初始化（大幅提升首屏速度）
     this._updateLoading(0.02, 'loading.scene');
-    await fetchConfig();
+    const configPromise = fetchConfig();
+
+    // 取模块轨道参数（需等待配置）
+    const configData = await configPromise;
     renderModules();
-    // 语言切换时重新渲染模块
     window.addEventListener('languagechange', () => renderModules());
 
-    // 取模块轨道参数（供首屏 3D 卫星）
     const orbitConfigs = getModuleOrbitConfigs();
 
     // 初始化 Three.js 首屏场景

@@ -32,9 +32,9 @@
   --light-border-strong: rgba(0, 0, 0, 0.16);
   --light-card: rgba(0, 0, 0, 0.015);
 
-  /* 字体 */
-  --font-display: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  /* 字体：Orbitron 科技显示 + Inter 正文 + JetBrains Mono 等宽 */
+  --font-display: 'Orbitron', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
 
   /* 间距尺度 */
@@ -224,10 +224,11 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   gap: var(--sp-2);
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
   color: var(--dark-text);
+  text-transform: uppercase;
 }
 .nav-logo-mark { color: var(--accent); flex-shrink: 0; }
 .nav-logo:hover { opacity: 0.85; }
@@ -350,8 +351,8 @@ img, svg { display: block; max-width: 100%; }
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
   line-height: 0.95;
   margin-bottom: var(--sp-3);
   color: #fff;
@@ -361,10 +362,10 @@ img, svg { display: block; max-width: 100%; }
 .hero-slogan {
   font-family: var(--font-display);
   font-size: clamp(1rem, 2.5vw, 1.35rem);
-  font-weight: 400;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.92);
   margin-bottom: var(--sp-3);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.06em;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.7);
 }
 
@@ -556,8 +557,8 @@ img, svg { display: block; max-width: 100%; }
 .module-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 3.2rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   line-height: 1.05;
   margin-bottom: var(--sp-3);
 }
